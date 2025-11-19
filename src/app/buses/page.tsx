@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 // ✅ Fetch all buses from backend
 async function getBuses() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/buses/`, {
+    const res = await fetch(`https://smart-qr-frontend-i8cu.vercel.app/buses/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -171,4 +171,5 @@ export default function BusesPage() {
     </main>
   </>
 );
+
 }
