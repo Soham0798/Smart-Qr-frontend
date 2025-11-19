@@ -81,7 +81,7 @@ export default function TicketPage() {
           // fetch bus details using bus_id to get bus_number
           try {
             const busRes = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL}/buses/id/${data.bus_id}`,
+              `https://smart-qr-backend-production.up.railway.app/buses/id/${data.bus_id}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -157,3 +157,4 @@ export default function TicketPage() {
     </>
   );
 }
+
