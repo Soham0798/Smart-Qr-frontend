@@ -222,7 +222,7 @@ export default function TicketsPage() {
           if (!ticket.bus_id) return ticket;
           try {
             const busRes = await fetch(
-              `https://smart-qr-backend-production.up.railway.app//buses/id/${ticket.bus_id}`,
+              `https://smart-qr-backend-production.up.railway.app/buses/id/${ticket.bus_id}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -382,5 +382,6 @@ export default function TicketsPage() {
     </>
   );
 }
+
 
 
