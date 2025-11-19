@@ -205,7 +205,7 @@ export default function TicketsPage() {
         return [];
       }
 
-      const res = await fetch(`https://smart-qr-backend-production.up.railway.app//bookings/`, {
+      const res = await fetch(`https://smart-qr-backend-production.up.railway.app/bookings/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -382,4 +382,5 @@ export default function TicketsPage() {
     </>
   );
 }
+
 
