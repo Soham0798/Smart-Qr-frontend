@@ -1,4 +1,4 @@
-const API = "https://smart-qr-backend-production.up.railway.app/" || "http://127.0.0.1:8000";
+const API ="https://smart-qr-backend-production.up.railway.app"
 
 export async function signup(username: string, password: string) {
   const res = await fetch(`${API}/auth/signup`, {
@@ -56,4 +56,5 @@ export async function getBooking(token: string, id: number) {
   });
   return res.json();
 }
+
 
