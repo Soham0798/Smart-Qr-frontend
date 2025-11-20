@@ -38,7 +38,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
           <h2 className="text-3xl font-bold text-center">
@@ -116,4 +116,5 @@ export default function AuthForm() {
       </div>
     </div>
   );
+
 }
