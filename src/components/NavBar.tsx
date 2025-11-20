@@ -23,7 +23,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 px-6 py-4 text-white shadow-md">
+    <nav className="flex items-center justify-between bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 px-4 py-3 text-white shadow-md w-full">
       {/* Logo */}
       <Link href="/" className="text-2xl font-bold flex items-center gap-2">
         SmartQR
@@ -73,4 +73,5 @@ export default function NavBar() {
     </nav>
   );
 }
+
 
