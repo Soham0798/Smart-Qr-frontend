@@ -31,7 +31,7 @@ function BusCard({ bus }: { bus: any }) {
   const router = useRouter();
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group hover:-translate-y-1 flex flex-col h-full">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group hover:-translate-y-1 flex flex-col min-h-screen py-6 px-4">
       <div className="p-6 flex-1">
         <div className="flex items-center justify-between mb-4">
           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
@@ -85,7 +85,7 @@ function BusCard({ bus }: { bus: any }) {
 // ✅ Enhanced loading component
 function LoadingSkeleton() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {[...Array(6)].map((_, i) => (
         <div key={i} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse flex flex-col h-full">
           <div className="flex-1">
@@ -173,4 +173,5 @@ export default function BusesPage() {
 );
 
 }
+
 
