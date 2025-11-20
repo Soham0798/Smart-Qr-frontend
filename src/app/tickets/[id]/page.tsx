@@ -64,7 +64,6 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getBooking } from "@/lib/api";
 import NavBar from "@/components/NavBar";
 
 export default function TicketPage() {
@@ -72,33 +71,40 @@ export default function TicketPage() {
   const [ticket, setTicket] = useState<any>(null);
   const [busNumber, setBusNumber] = useState<string>("");
 
-  useEffect(() => {
+  const API = "https://smart-qr-backend-production.up.railway.app";
+
+  async function fetchTicket() {
     const token = localStorage.getItem("token");
-    if (token && id) {
-      getBooking(token, Number(id)).then(async (data) => {
-        setTicket(data);
-        if (data?.bus_id) {
-          // fetch bus details using bus_id to get bus_number
-          try {
-            const busRes = await fetch(
-              `https://smart-qr-backend-production.up.railway.app/buses/id/${data.bus_id}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            if (busRes.ok) {
-              const busData = await busRes.json();
-              setBusNumber(busData.bus_number || "");
-            }
-          } catch (err) {
-            console.error("Error fetching bus details:", err);
-          }
-        }
+
+    // 1️⃣ Try private endpoint (if logged in)
+    if (token) {
+      const res = await fetch(`${API}/bookings/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
       });
+      if (res.ok) return res.json();
     }
+
+    // 2️⃣ If NOT logged in → fallback to public endpoint
+    const res = await fetch(`${API}/bookings/public/${id}`);
+    if (res.ok) return res.json();
+
+    return null;
+  }
+
+  useEffect(() => {
+    if (!id) return;
+
+    fetchTicket().then(async (data) => {
+      setTicket(data);
+
+      if (data?.bus_id) {
+        const busRes = await fetch(`${API}/buses/id/${data.bus_id}`);
+        if (busRes.ok) {
+          const busData = await busRes.json();
+          setBusNumber(busData.bus_number || "");
+        }
+      }
+    });
   }, [id]);
 
   if (!ticket)
@@ -106,14 +112,10 @@ export default function TicketPage() {
 
   const getStatusColor = (status: string = "Active") => {
     switch (status) {
-      case "Active":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "Used":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "Expired":
-        return "bg-red-100 text-red-800 border-red-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
+      case "Active": return "bg-green-100 text-green-800 border-green-200";
+      case "Used": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Expired": return "bg-red-100 text-red-800 border-red-200";
+      default: return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
@@ -157,4 +159,5 @@ export default function TicketPage() {
     </>
   );
 }
+
 
