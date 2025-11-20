@@ -122,7 +122,7 @@ export default function TicketPage() {
   return (
     <>
       <NavBar />
-      <main className="flex justify-center items-center h-[90vh] bg-gray-50">
+      <main className="flex justify-center items-center min-h-screen bg-gray-50 px-4 py-8">
         <div className="bg-white/10 backdrop-blur-lg p-5 rounded-2xl border border-white/20 flex flex-col items-center shadow-lg w-full max-w-md mx-4">
           <div className="w-full flex justify-between items-center mb-3">
             <h1 className="text-xl font-semibold text-gray-700">
@@ -149,7 +149,7 @@ export default function TicketPage() {
                 <img
                   src={ticket.qr_link}
                   alt="QR Code"
-                  className="w-48 h-48 mx-auto"
+                  className="w-56 h-56 mx-auto object-contain"
                 />
               </div>
             )}
@@ -159,5 +159,6 @@ export default function TicketPage() {
     </>
   );
 }
+
 
 
