@@ -9,7 +9,7 @@ export default function ProfilePage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+        const res = await fetch(`https://smart-qr-backend-production.up.railway.app/users/me`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -92,3 +92,4 @@ export default function ProfilePage() {
     </>
   );
 }
+
