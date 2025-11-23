@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 interface Ticket {
   id: string | number;
   bus_id?: string;
-  bus_number?: string; // added
+  bus_number?: string;
   source: string;
   destination: string;
   fare: number;
@@ -39,7 +39,6 @@ export default function TicketsPage() {
 
       const data = await res.json();
 
-      // ✅ Fetch bus numbers for each ticket
       const ticketsWithBusNumbers = await Promise.all(
         data.map(async (ticket: any) => {
           if (!ticket.bus_id) return ticket;
@@ -114,13 +113,17 @@ export default function TicketsPage() {
   return (
     <>
       <NavBar />
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-4 md:py-10 px-3 sm:px-4 flex justify-center items-start sm:items-center">
-        <div className="w-full max-w-[95vw] sm:max-w-sm md:max-w-md lg:max-w-xl bg-white/10 backdrop-blur-lg p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-white/20 shadow-lg sm:shadow-xl mx-auto">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-gray-800 mb-3">My Tickets</h1>
-            <p className="text-gray-600">Manage and view your bus tickets</p>
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 px-4 sm:px-6">
+        {/* Header Section - Full width */}
+        <div className="max-w-7xl mx-auto mb-8">
+          <div className="text-center">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">My Tickets</h1>
+            <p className="text-gray-600 text-lg">Manage and view your bus tickets</p>
           </div>
+        </div>
 
+        {/* Tickets Grid - Full responsive container */}
+        <div className="max-w-7xl mx-auto">
           {error ? (
             <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
@@ -132,7 +135,7 @@ export default function TicketsPage() {
               </button>
             </div>
           ) : tickets.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center max-w-md mx-auto">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-12 text-center max-w-md mx-auto">
               <div className="text-6xl mb-4">🎫</div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">No tickets found</h3>
               <p className="text-gray-600 mb-6">You haven't booked any tickets yet.</p>
@@ -144,7 +147,7 @@ export default function TicketsPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {tickets.map((ticket) => (
                 <div
                   key={ticket.id}
@@ -152,17 +155,17 @@ export default function TicketsPage() {
                 >
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h2 className="text-lg font-semibold text-gray-800">
+                      <div className="flex-1 min-w-0">
+                        <h2 className="text-lg font-semibold text-gray-800 truncate">
                           {ticket.source} → {ticket.destination}
                         </h2>
                         {ticket.bus_number && (
-                          <p className="text-gray-600 text-sm mt-1">
+                          <p className="text-gray-600 text-sm mt-1 truncate">
                             Bus: {ticket.bus_number}
                           </p>
                         )}
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(ticket.status)}`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border flex-shrink-0 ml-2 ${getStatusColor(ticket.status)}`}>
                         {ticket.status || "Active"}
                       </span>
                     </div>
@@ -175,13 +178,13 @@ export default function TicketsPage() {
                       {ticket.travel_date && (
                         <div className="flex justify-between">
                           <span className="text-gray-600">Travel Date:</span>
-                          <span className="font-medium text-gray-800">{formatDate(ticket.travel_date)}</span>
+                          <span className="font-medium text-gray-800 text-sm">{formatDate(ticket.travel_date)}</span>
                         </div>
                       )}
                       {ticket.booking_date && (
                         <div className="flex justify-between">
                           <span className="text-gray-600">Booked On:</span>
-                          <span className="font-medium text-gray-800">{formatDate(ticket.booking_date)}</span>
+                          <span className="font-medium text-gray-800 text-sm">{formatDate(ticket.booking_date)}</span>
                         </div>
                       )}
                     </div>
@@ -191,7 +194,7 @@ export default function TicketsPage() {
                         <img
                           src={ticket.qr_link}
                           alt="Ticket QR Code"
-                          className="w-32 h-32 object-contain mx-auto border rounded-lg"
+                          className="w-24 h-24 sm:w-28 sm:h-28 object-contain mx-auto border rounded-lg"
                         />
                       </div>
                     )}
@@ -205,10 +208,3 @@ export default function TicketsPage() {
     </>
   );
 }
-
-
-
-
-
-
-
