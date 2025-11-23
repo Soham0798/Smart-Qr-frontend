@@ -31,7 +31,16 @@ export default function NavBar() {
     setIsMenuOpen(false);
   };
 
-  const navLinks = [
+  // Desktop nav links (includes Help)
+  const desktopNavLinks = [
+    { href: "/", icon: Home, label: "Home" },
+    { href: "/nearby", icon: MapPin, label: "Around Me" },
+    { href: "/tickets", icon: Ticket, label: "Tickets" },
+    { href: "/profile", icon: User, label: "Profile" },
+  ];
+
+  // Mobile nav links (excludes Help)
+  const mobileNavLinks = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/nearby", icon: MapPin, label: "Around Me" },
     { href: "/tickets", icon: Ticket, label: "Tickets" },
@@ -40,7 +49,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="flex items-center justify-between bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 px-4 py-3 text-white shadow-md w-full overflow-x-hidden relative ">
+      <nav className="flex items-center justify-between bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 px-4 py-3 text-white shadow-md w-full relative">
         {/* Logo */}
         <Link href="/" className="text-xl sm:text-2xl font-bold flex items-center gap-2 z-50">
           SmartQR
@@ -58,9 +67,9 @@ export default function NavBar() {
           />
         </form>
 
-        {/* Desktop nav links - hidden on mobile */}
+        {/* Desktop nav links - hidden on mobile (includes Help) */}
         <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium">
-          {navLinks.map((link) => {
+          {desktopNavLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
             return (
@@ -86,7 +95,7 @@ export default function NavBar() {
           </button>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button - always visible on mobile */}
         <button
           onClick={toggleMenu}
           className="md:hidden flex items-center justify-center w-10 h-10 z-50"
@@ -135,9 +144,9 @@ export default function NavBar() {
             </form>
           </div>
 
-          {/* Mobile navigation links */}
+          {/* Mobile navigation links (excludes Help) */}
           <div className="flex flex-col p-4 space-y-2 flex-1">
-            {navLinks.map((link) => {
+            {mobileNavLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
               return (
@@ -155,9 +164,10 @@ export default function NavBar() {
               );
             })}
           </div>
+         
 
           {/* Logout button at bottom */}
-          <div className="p-4 border-t border-blue-700 mt-auto">
+          <div className="p-4 border-t border-blue-700">
             <button
               onClick={() => {
                 closeMenu();
@@ -174,4 +184,3 @@ export default function NavBar() {
     </>
   );
 }
-
