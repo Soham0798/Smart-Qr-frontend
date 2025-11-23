@@ -114,8 +114,8 @@ export default function TicketsPage() {
   return (
     <>
       <NavBar />
-      <main className=" bg-gradient-to-br from-gray-50 to-blue-50 py-10 px-4">
-        <div className="max-w-md p-4 w-full mx-auto">
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-10 px-4 flex justify-center">
+        <div className="w-full max-w-md md:max-w-lg lg:max-w-xl bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-xl">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold text-gray-800 mb-3">My Tickets</h1>
             <p className="text-gray-600">Manage and view your bus tickets</p>
@@ -205,6 +205,7 @@ export default function TicketsPage() {
     </>
   );
 }
+
 
 
 
