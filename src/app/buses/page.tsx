@@ -26,9 +26,14 @@ async function getBuses() {
   }
 }
 
+
 // ✅ Enhanced BusCard component with book button at bottom
 function BusCard({ bus }: { bus: any }) {
   const router = useRouter();
+  const percent = Math.min(
+    (bus.booked_seats / bus.capacity) * 100,
+    100
+  );
 
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group hover:-translate-y-1 flex flex-col min-h-screen py-6 px-4">
@@ -173,5 +178,6 @@ export default function BusesPage() {
 );
 
 }
+
 
 
