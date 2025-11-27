@@ -210,7 +210,7 @@ export default function NearbyBusesPage() {
                       
                       <div className="bg-gray-50 px-6 py-4 border-t">
                         <button 
-                          onClick={() => router.push(`/bus-details/${bus.id}`)}
+                          onClick={() => router.push(`/buses`)}
                           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm cursor-pointer"
                         >
                           View Bus Details
@@ -228,6 +228,7 @@ export default function NearbyBusesPage() {
   );
 
 }
+
 
 
 
