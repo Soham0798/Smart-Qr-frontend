@@ -196,7 +196,6 @@ export default function NearbyBusesPage() {
                           </div>
                           
                           <div className="flex items-center text-gray-600">
-                            <span className="w-5">🆔</span>
                             <span className="text-sm">ID: {bus.id}</span>
                           </div>
 
@@ -228,6 +227,7 @@ export default function NearbyBusesPage() {
   );
 
 }
+
 
 
 
