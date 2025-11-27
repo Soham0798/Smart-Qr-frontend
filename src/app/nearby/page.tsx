@@ -57,7 +57,7 @@ export default function NearbyBusesPage() {
       setBuses(data);
     } catch (err) {
       console.error("Error fetching buses:", err);
-      setError("Failed to fetch nearby buses. Please try again.");
+      setError("No buses nearby");
     } finally {
       setLoading(false);
     }
@@ -228,5 +228,6 @@ export default function NearbyBusesPage() {
   );
 
 }
+
 
 
