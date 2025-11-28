@@ -178,6 +178,7 @@ export default function NavBar() {
     </>
   );
 }
+*/
 "use client";
 
 import Link from "next/link";
@@ -353,6 +354,7 @@ export default function NavBar() {
     </>
   );
 }
+
 
 
 
