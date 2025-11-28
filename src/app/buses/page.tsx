@@ -25,6 +25,21 @@ async function getBuses() {
     return [];
   }
 }
+useEffect(() => {
+  getBuses().then((data) => {
+    const q = new URLSearchParams(window.location.search).get("search")?.toLowerCase();
+
+    if (q) {
+      data = data.filter(bus =>
+        bus.route?.toLowerCase().includes(q) ||
+        bus.bus_number?.toLowerCase().includes(q)
+      );
+    }
+
+    setBuses(data);
+    setLoading(false);
+  });
+}, []);
 
 
 // ✅ Enhanced BusCard component with book button at bottom
@@ -178,6 +193,7 @@ export default function BusesPage() {
 );
 
 }
+
 
 
 
