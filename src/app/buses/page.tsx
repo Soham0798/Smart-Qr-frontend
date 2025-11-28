@@ -196,11 +196,14 @@ export default function BusesPage() {
 }
 */
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import NavBar from "@/components/NavBar";
 
-// ✅ Fetch all buses from backend
+// ======================
+// FETCH ALL BUSES
+// ======================
 async function getBuses() {
   try {
     const res = await fetch(
@@ -209,7 +212,8 @@ async function getBuses() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") : ""
+            }`,
         },
       }
     );
@@ -228,7 +232,7 @@ async function getBuses() {
 }
 
 // ======================
-// ✅ BusCard Component
+// BUS CARD
 // ======================
 function BusCard({ bus }: { bus: any }) {
   const router = useRouter();
@@ -311,7 +315,7 @@ function BusCard({ bus }: { bus: any }) {
       <div className="p-6 pt-4 border-t border-gray-100">
         <button
           onClick={() => router.push(`/book?bus_id=${bus.id}`)}
-          className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg"
+          className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-800"
         >
           Book Ticket
         </button>
@@ -321,7 +325,7 @@ function BusCard({ bus }: { bus: any }) {
 }
 
 // ============================
-// 🔵 Loading Skeleton
+// LOADING SKELETON
 // ============================
 function LoadingSkeleton() {
   return (
@@ -351,9 +355,9 @@ function LoadingSkeleton() {
 }
 
 // =============================
-// 🔵 MAIN PAGE WITH SEARCH
+// CONTENT WRAPPED IN SUSPENSE
 // =============================
-export default function BusesPage() {
+function BusesPageContent() {
   const [buses, setBuses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
@@ -378,7 +382,7 @@ export default function BusesPage() {
     }
 
     load();
-  }, [searchQuery]); // 🔥 page reloads when ?search= changes
+  }, [searchQuery]);
 
   return (
     <>
@@ -391,8 +395,7 @@ export default function BusesPage() {
               Available Buses
             </h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Choose from our fleet of comfortable and reliable buses for your
-              journey
+              Choose from our fleet of comfortable and reliable buses for your journey
             </p>
           </div>
 
@@ -434,6 +437,19 @@ export default function BusesPage() {
     </>
   );
 }
+
+// =============================
+// FIXED PAGE WRAPPED IN SUSPENSE
+// =============================
+export default function BusesPage() {
+  return (
+    <Suspense fallback={<LoadingSkeleton />}>
+      <BusesPageContent />
+    </Suspense>
+  );
+}
+
+
 
 
 
