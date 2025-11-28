@@ -11,13 +11,12 @@ export default function NavBar() {
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+    const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      alert(`Searching buses for: ${query}`);
-      setQuery("");
-    }
+    if (!query.trim()) return;
+    router.push(`/buses?search=${encodeURIComponent(query.trim())}`);
   };
+
 
   const handleLogout = () => {
     router.push("/");
@@ -184,3 +183,4 @@ export default function NavBar() {
     </>
   );
 }
+
