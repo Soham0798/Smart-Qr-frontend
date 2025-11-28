@@ -36,7 +36,7 @@ useEffect(() => {
       );
     }
 
-    setBuses(data);
+    getBuses(data);
     setLoading(false);
   });
 }, []);
@@ -193,6 +193,7 @@ export default function BusesPage() {
 );
 
 }
+
 
 
 
