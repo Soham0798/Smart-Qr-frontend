@@ -50,7 +50,7 @@ export default function NearbyBusesPage() {
   const fetchNearbyBuses = async (lat: number, lon: number) => {
     try {
       const res = await fetch(
-        `https://smart-qr-backend-production.up.railway.app/buses/nearby?lat=${lat}&lon=${lon}&radius=6`
+        `https://smart-qr-backend-zo5i.onrender.com/buses/nearby?lat=${lat}&lon=${lon}&radius=6`
       );
       if (!res.ok) throw new Error("Failed to fetch nearby buses");
       const data = await res.json();
@@ -227,6 +227,7 @@ export default function NearbyBusesPage() {
   );
 
 }
+
 
 
 
