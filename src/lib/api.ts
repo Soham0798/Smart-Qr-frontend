@@ -1,4 +1,4 @@
-const API ="https://smart-qr-backend-production.up.railway.app"
+const API ="https://smart-qr-backend-zo5i.onrender.com"
 
 export async function signup(username: string, password: string) {
   const res = await fetch(`${API}/auth/signup`, {
@@ -56,5 +56,6 @@ export async function getBooking(token: string, id: number) {
   });
   return res.json();
 }
+
 
 
